@@ -1,24 +1,40 @@
-import os
-import collections
+# -*- coding: utf-8 -*-
+"""
+This module helps with the creation of Python project templates.
+Install it:
+    pip install --upgrade git+https://github.com/rubenwap/autopython.git@master
+And use it as:
+    autopython "Name of my project" --pipenv
+    or
+    autopython "Name of my project" --no-pipenv
+    depending on what are your pipenv needs
+
+"""
+
+
 import argparse
+import collections
+import os
 import re
 import subprocess
 
 
 def create_file(path, content):
-    with open(path, 'a+') as f:
-        f.write(content)
-
+    """Creates a file. Essential functionality for this template generation"""
+    with open(path, 'a+') as file:
+        file.write(content)
 
 def generate_structure(files):
-    for f in files:
-        if not os.path.exists(f.path):
-            os.makedirs(f.path)
-        create_file("{path}/{file}".format(path=f.path,
-                                           file=f.file), f.content)
+    """Generates the structure based on the list of files provided"""
+    for file in files:
+        if not os.path.exists(file.path):
+            os.makedirs(file.path)
+        create_file("{path}/{file}".format(path=file.path,
+                                           file=file.file), file.content)
 
 
 def main():
+    """Runs the main set of actions"""
     parser = argparse.ArgumentParser(
         description='Creates Python project structure')
     parser.add_argument('name', type=str, help='Name of your application')
@@ -29,16 +45,16 @@ def main():
     args = parser.parse_args()
 
     name = re.sub(r"\s+", '-', args.name).lower()
-    File = collections.namedtuple("File", ["path", "file", "content"])
+    auto_file = collections.namedtuple("File", ["path", "file", "content"])
 
     files = [
 
-        File("./{}".format(name), "__init__.py", "from . import utils"),
-        File("./{}".format(name), "{}.py".format(name), "from . import helpers"),
-        File("./{}".format(name), "helpers.py", "# helper functions"),
-        File("./test", "test_basics.py", "# Tests"),
-        File(".", "setup.py", "# setup.py"),
-        File(".", "README.md", "# Sample")
+        auto_file("./{}".format(name), "__init__.py", "from . import utils"),
+        auto_file("./{}".format(name), "{}.py".format(name), "from . import helpers"),
+        auto_file("./{}".format(name), "helpers.py", "# helper functions"),
+        auto_file("./test", "test_basics.py", "# Tests"),
+        auto_file(".", "setup.py", "# setup.py"),
+        auto_file(".", "README.md", "# Sample")
 
     ]
 

@@ -1,22 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+This module helps with the creation of Python project templates.
+Install it:
+    pip install --upgrade git+https://github.com/rubenwap/autopython.git@master
+And use it as:
+    autopython "Name of my project" --pipenv
+    or
+    autopython "Name of my project" --no-pipenv
+    depending on what are your pipenv needs
 
-from setuptools import setup, find_packages
-from os import path
+"""
+
 from io import open
+from os import path
 
-here = path.abspath(path.dirname(__file__))
+from setuptools import setup
+
+HERE = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+with open(path.join(HERE, 'README.md'), encoding='utf-8') as file:
+    LONG_DESCRIPTION = file.read()
 
 setup(
 
     name='autopython',
     version='1.0.0',  # Required
     description='Python template for Automation',  # Optional
-    long_description=long_description,  # Optional
+    long_description=LONG_DESCRIPTION,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
-    # url='https://github.com/pypa/sampleproject',  # Optional
+    url='https://github.com/rubenwap/autopython',  # Optional
     author='Ruben Sanchez',  # Optional
     # author_email='',  # Optional
 
