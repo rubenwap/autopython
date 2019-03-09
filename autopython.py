@@ -44,7 +44,7 @@ def main():
 
     args = parser.parse_args()
 
-    name = re.sub(r"\s+", '-', args.name).lower()
+    name = re.sub(r"\s+", '_', args.name).lower()
     auto_file = collections.namedtuple("auto_file", ["path", "file", "content"])
 
     files = [

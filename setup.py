@@ -25,7 +25,7 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as file:
 setup(
 
     name='autopython',
-    version='1.0.1',  # Required
+    version='1.0.2',  # Required
     description='Python template for Automation',  # Optional
     long_description=LONG_DESCRIPTION,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
